@@ -8,5 +8,12 @@ module.exports = function(app) {
  app.route('/api/activities/:id')
    .get(stats.readActivity)
    .put(stats.updateActivity)
-   .delete(stats.deleteActivity)
+   .delete(stats.deleteActivity);
+
+
+ app.route('/api/activities/:id/stats')
+   .post(stats.postStat);
+
+ app.route('/api/stats/:id')
+   .delete(stats.deleteStat);
 }

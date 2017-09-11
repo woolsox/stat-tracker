@@ -19,18 +19,18 @@ mongoose.connect('mongodb://localhost/Statsdb');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// The snippet below helps to redirect and respond whenever a wrong route is entered on the site.
-app.use(function(req, res) {
-  res.status(404).send({url: req.originalUrl + ' not found'})
-});
-
 // pulls in routes so we don't need them all in here making for
 // a cluttered piece of shit.
 const routes = require('./routes/statRoutes');
 routes(app);
 
-// "do you believe in ports after life? i can feel port 3000 inside me saying, I really
-// do think you're connected enough - ohhh!"
+// The snippet below helps to redirect and respond whenever a wrong route is entered on the site.
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+});
+
+
+// "do you believe in ports after life? i can feel port 3000 inside me saying, I really dont think you're connected enough - ohHHhH!"
 app.listen(port, function() {
  console.log('Stat Tracker running...')
 });

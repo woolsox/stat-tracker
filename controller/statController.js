@@ -19,7 +19,7 @@ exports.createActivity = function(req, res) {
 };
 
 exports.readActivity = function(req, res) {
- Stats.findById(req.params.statsId, function(err, stats) {
+ Stats.findById(req.params.id, function(err, stats) {
   if (err)
    res.send(err);
   res.json(stats);
@@ -28,7 +28,7 @@ exports.readActivity = function(req, res) {
 
 exports.updateActivity = function(req, res) {
  Stats.findOneAndUpdate({
-  _id: req.params.statsId
+  _id: req.params.id
  }, req.body, {
   new: true
 }, function(err, stats) {
@@ -40,7 +40,7 @@ exports.updateActivity = function(req, res) {
 
 exports.deleteActivity = function(req, res) {
  Stats.remove({
-  _id: req.params.statsId
+  _id: req.params.id
 }, function(err, stats) {
   if (err)
    res.send(err);
@@ -49,3 +49,27 @@ exports.deleteActivity = function(req, res) {
   });
  });
 };
+
+exports.postStat = function(req, res) {
+  Stats.findOneAndUpdate({
+    _id: req.params.id
+  }, req.body, {
+   new: true
+ }, function(err, stats) {
+   if (err)
+    res.send(err);
+   res.json(stats);
+  });
+ };
+
+ exports.deleteStat = function(req, res) {
+  Stats.remove({
+   stats: req.body.stats
+ }, function(err, stats) {
+   if (err)
+    res.send(err);
+   res.json({
+    message: 'Stat successfully deleted'
+   });
+  });
+ };
